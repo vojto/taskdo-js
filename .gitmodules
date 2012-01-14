@@ -1,0 +1,6 @@
+[submodule "app/appkit"]
+	path = app/appkit
+	url = git@github.com:vojto/spine-appkit
+[submodule "app/lib/appkit"]
+	path = app/lib/appkit
+	url = git@github.com:vojto/spine-appkit
