@@ -9,6 +9,7 @@
     "spine/lib/route",
     "spine/lib/tmpl",
     "spine/lib/manager",
+    "atmos2",
     "appkit"
   ],
   "libs": []
