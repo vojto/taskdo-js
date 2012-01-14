@@ -1,0 +1,17 @@
+Spine = require('spine')
+Kit = require('appkit')
+
+Course = require('models/course')
+
+class Courses extends Kit.Controller
+  constructor: ->
+    super
+    @active @_didActivate
+    @courses = new Kit.List(model: Course)
+    @list = new Kit.GroupedList(groups: {"My Courses": @courses})
+    @append @list
+  
+  _didActivate: ->
+    Course.sync()
+
+module.exports = Courses
