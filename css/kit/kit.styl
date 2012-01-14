@@ -1,0 +1,69 @@
+@import './mixins'
+
+// Special
+// ----------------------------------------------------------------------------
+
+left()
+  float left
+
+right()
+  float right
+
+clear()
+  display block
+  &:after
+    content "\0020"
+    display block
+    height 0
+    clear both
+    visibility hidden
+    overflow hidden
+
+// Interface Elements
+// ----------------------------------------------------------------------------
+
+box()
+  padding 15px
+
+stripe()
+  border-bottom 1px solid #dbdbdb
+
+header()
+  stripe()
+  background #ececec
+
+big-font()
+  font-size 14px
+  font-weight bold
+
+.box
+  box()
+
+// List
+
+ul.list
+  list-style-type none
+  padding 0px
+  margin 0px
+  
+  li
+    box()
+    stripe()
+    big-font()
+    cursor pointer
+    
+    &.touch, &:active
+      vbg-gradient(#5e97d8, #79ade9)
+      color #fff
+    &:first-child
+      border-radius(4px 4px 0px 0px)
+    &:last-child
+      border-radius(0px 0px 4px 4px)
+
+  &.grouped
+    border-radius(5px)    
+    border 1px solid #d6d6d6
+    margin 50px
+    margin-top 100px
+    background #f7f7f7
+    border-bottom #ededee

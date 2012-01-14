@@ -1,0 +1,44 @@
+@import './kit/kit'
+
+// Typo
+// ----------------------------------------------------------------------------
+body, input
+  font-family: Helvetica Neue, Helvetica, Arial, sans-serif
+  
+// Layout
+// ----------------------------------------------------------------------------
+
+body, html
+  margin: 0;
+  padding: 0;
+  width: 100%
+  height: 100%
+
+body
+  vbox()
+
+header#header
+  vbg-gradient(#4173ad, #5284bf)
+  border-bottom 2px solid #4e7bb2
+  height 30px
+  
+  .inside
+    height 100%
+    background url(/images/logo.png) no-repeat center
+
+article#content
+  box-flex(1)
+  hbox()
+  background #ededee url(/images/noise-light.png)
+  
+  &.without-sidebar
+    background #e6e6e7 url(/images/noise-dark.png)
+  
+  #sidebar
+    width 25%
+    background #e6e6e7 url(/images/noise-dark.png)
+    border-right 1px solid #c8cace
+    
+  #main
+    box-flex(1)
+    margin-top 30px

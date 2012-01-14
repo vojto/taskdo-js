@@ -1,0 +1,13 @@
+{
+  "name": "app",
+  "version": "0.0.1",
+  "dependencies": { 
+    "serveup": "~0.0.2",
+    "hem": "git://github.com/vojto/hem.git",
+    "es5-shimify": "~0.0.1",
+    "json2ify": "~0.0.1",
+    "jqueryify": "~0.0.1",
+    "spine": "~1.0.5",
+    "appkit": "git://github.com/vojto/spine-appkit.git"
+  }
+}
