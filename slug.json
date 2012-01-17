@@ -11,7 +11,8 @@
     "spine/lib/manager",
     "spine/lib/relation",
     "atmos2",
-    "atmos2/lib/spine"
+    "atmos2/lib/spine",
+    "appkit"
   ],
   "libs": []
 }

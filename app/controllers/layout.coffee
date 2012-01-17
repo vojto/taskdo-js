@@ -1,5 +1,5 @@
 Spine = require('spine')
-Kit     = require('lib/appkit/index')
+Kit     = require('appkit')
 
 class Layout extends Kit.Controller
   template: require('views/layout')

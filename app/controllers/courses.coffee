@@ -1,5 +1,5 @@
 Spine = require('spine')
-Kit     = require('lib/appkit/index')
+Kit     = require('appkit')
 
 Course = require('models/course')
 

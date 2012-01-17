@@ -1,7 +1,7 @@
 require('lib/setup')
 
 Spine   = require('spine')
-Kit     = require('lib/appkit/index')
+Kit     = require('appkit')
 Atmos   = require('atmos2')
 
 Layout  = require('controllers/layout')
