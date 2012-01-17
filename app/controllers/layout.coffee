@@ -13,8 +13,10 @@ class Layout extends Kit.Controller
   # ---------------------------------------------------------------------------
   
   setMain: (el) ->
+    @$("#top").html("")
     el = el.el if el.el?
-    @$("#main").html(el)
+    @$("#main").children().detach()
+    @$("#main").append(el)
   
   # Showing/hiding sidebar
   # ---------------------------------------------------------------------------
@@ -26,6 +28,16 @@ class Layout extends Kit.Controller
   showSidebar: ->
     @$('#sidebar').show()
     @$('#content').removeClass('without-sidebar')
+    
+  # Working with buttons
+  # ---------------------------------------------------------------------------
   
+  addTopButton: (title, action, type = null) ->
+    button = $("<a />").attr("href", "#").text(title)
+    button.addClass(type) if type
+    button.addClass("button").addClass("background")
+    button.click(action)
+    @$("#top").append(button)
+    button
   
 module.exports = Layout
