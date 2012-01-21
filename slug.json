@@ -12,6 +12,7 @@
     "spine/lib/relation",
     "atmos2",
     "atmos2/lib/spine",
+    "atmos2/lib/defaults",
     "appkit"
   ],
   "libs": []

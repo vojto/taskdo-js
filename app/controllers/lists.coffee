@@ -12,8 +12,8 @@ class Lists extends Kit.Controller
     @active @update
     
     # Create test list
-    list = new List(title: "Vojto's List")
-    list.save()
+    # list = new List(title: "Vojto's List")
+    # list.save()
     
     # @courses = new Kit.List(model: Course, delegate: this)
     # @list = new Kit.GroupedList(groups: {"My Courses": @courses}, type: "small")
