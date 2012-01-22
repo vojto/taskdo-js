@@ -7,8 +7,7 @@ Defaults = require('atmos2/lib/defaults')
 
 Layout      = require('controllers/layout')
 Lists       = require('controllers/lists')
-# Courses     = require('controllers/courses')
-# CourseForm  = require('controllers/course_form')
+ListForm    = require('controllers/list_form')
 List        = require('models/list')
 
 class App extends Spine.Controller
@@ -17,18 +16,17 @@ class App extends Spine.Controller
     @_setupAtmos()
 
     @layout     = new Layout(el: @el)
-    # @courses    = new Courses(layout: @layout)
-    # @courseForm = new CourseForm(layout: @layout)
     @lists      = new Lists(layout: @layout)
+    @listForm   = new ListForm(layout: @layout)
     
     @routes
       '':             (params) -> @lists.active(params)
       '/lists':       (params) -> @lists.active(params)
+      '/lists/new':    (params) -> @listForm.active(params)
       '/login':       (params) -> @login()
     @route /access_token=(.*?)&token_type=(.*?)&expires_in=(.*?)/, @authorize
     
     Spine.Route.setup()
-    # @navigate '/courses'
     
   
   _setupAtmos: ->
@@ -41,6 +39,11 @@ class App extends Spine.Controller
       @atmos.resourceClient.addHeader "Authorization", "OAuth #{token}"
     @atmos.resourceClient.itemsFromResult = (result) ->
       result.items
+      
+    @atmos.bind 'auth_fail', =>
+      result = confirm("Auth failed, login again?")
+      @navigate '/login' if result
+      
     List.sync(remote: true)
   
   login: ->
@@ -57,6 +60,7 @@ class App extends Spine.Controller
     expires = match[3]
     console.log "token: #{token}"
     Defaults.set 'auth_token', token
+    @navigate '/'
 
 
 module.exports = App

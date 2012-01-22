@@ -24,7 +24,7 @@ class Lists extends Kit.Controller
   update: ->
     @layout.setMain(this)
     @layout.addTopButton "New List", @newAction, 'right'
-    # Course.fetch() # TODO: Sync, but not at all times
+    List.fetch() # Not sync
   
   listDidSelectItem: (list, item) ->
     alert "Selected item #{item.name}"
@@ -34,6 +34,6 @@ class Lists extends Kit.Controller
   
   newAction: (e) =>
     e.preventDefault()
-    @navigate '/courses/new'
+    @navigate '/lists/new'
 
 module.exports = Lists
