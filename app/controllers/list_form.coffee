@@ -17,7 +17,7 @@ class ListForm extends Kit.Controller
   
   didSubmit: (object) ->
     list = new List(object)
-    list.save()
+    list.save(remote: true)
     @navigate '/lists'
     
   backAction: =>

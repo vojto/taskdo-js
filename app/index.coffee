@@ -32,16 +32,18 @@ class App extends Spine.Controller
   
   _setupAtmos: ->
     @atmos = new Atmos
-    @atmos.resourceClient.base = "https://www.googleapis.com/tasks/v1/users/@me/"
+    @atmos.resourceClient.base = "https://www.googleapis.com/tasks/v1/users/@me"
     @atmos.resourceClient.routes =
       List:
-        index: "lists"
-    @atmos.resourceClient.itemsFromResult = (result) ->
-      result.items
+        index: "GET /lists"
+        create: "POST /lists"
+    @atmos.resourceClient.itemsFromResult = (result) -> result.items
+    @atmos.resourceClient.dataCoding = "json"
     @atmos.bind 'auth_fail', =>
       result = confirm("Auth failed, login again?")
       @navigate '/login' if result
     @_setupAtmosAuth()
+    @atmos.setNeedsSync()
   
   _setupAtmosAuth: ->
     Defaults.get 'auth_token', (token) =>

@@ -7,3 +7,4 @@ class List extends Spine.Model
   @extend Spine.Model.Atmosphere
 
 module.exports = List
+window.List = List
