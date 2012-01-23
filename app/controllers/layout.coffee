@@ -7,27 +7,21 @@ class Layout extends Kit.Controller
   constructor: ->
     super
     @render()
-    @hideSidebar()
   
   # Setting main content
   # ---------------------------------------------------------------------------
   
   setMain: (el) ->
-    @$("#top").html("")
+    @$("#header .inside .buttons").html("")
     el = el.el if el.el?
     @$("#main").children().detach()
     @$("#main").append(el)
   
-  # Showing/hiding sidebar
+  # Setting title
   # ---------------------------------------------------------------------------
-  
-  hideSidebar: ->
-    @$('#sidebar').hide()
-    @$('#content').addClass('without-sidebar')
-  
-  showSidebar: ->
-    @$('#sidebar').show()
-    @$('#content').removeClass('without-sidebar')
+
+  setTitle: (title) ->
+    @$("#header .inside .title").text(title)
     
   # Working with buttons
   # ---------------------------------------------------------------------------
@@ -37,7 +31,7 @@ class Layout extends Kit.Controller
     button.addClass(type) if type
     button.addClass("button").addClass("background")
     button.click(action)
-    @$("#top").append(button)
+    @$("#header .inside .buttons").append(button)
     button
   
 module.exports = Layout

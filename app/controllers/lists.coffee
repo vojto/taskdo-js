@@ -22,8 +22,9 @@ class Lists extends Kit.Controller
     @append @grouped
   
   update: ->
+    @layout.setTitle("Your Lists")
     @layout.setMain(this)
-    @layout.addTopButton "New List", @newAction, 'right'
+    @layout.addTopButton "New List", @newAction
     List.sync(remote: true)
   
   listDidSelectItem: (list, item) ->
