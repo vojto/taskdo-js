@@ -13,12 +13,19 @@ class ListForm extends Kit.Controller
   
   update: ->
     @layout.setMain(this)
-    @layout.addTopButton "Back", @backAction, 'right'
+    @layout.setTitle "Edit List"
+    @layout.addTopButton "Save", @submitAction
   
   didSubmit: (object) ->
+    console.log "submitted", object
     list = new List(object)
     list.save(remote: true)
     @navigate '/lists'
+  
+  submitAction: (e) =>
+    e.preventDefault()
+    console.log "submitting like a baus"
+    @form.submit()
     
   backAction: =>
     @navigate '/lists'

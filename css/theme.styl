@@ -1,5 +1,11 @@
 @import './kit/kit'
 
+// Reusable
+// ----------------------------------------------------------------------------
+
+paper-shadow()
+  box-shadow(0px 1px 5px rgba(0, 0, 0, 0.75))
+
 // Typo
 // ----------------------------------------------------------------------------
 body, input
@@ -82,7 +88,7 @@ ul.list
     background: url(/images/paper-row-pattern.png) repeat-x center bottom
     margin-bottom 10px
     border-radius(3px)
-    box-shadow(0px 1px 5px rgba(0, 0, 0, 0.75))
+    paper-shadow()
     border none
     padding 12px 20px 12px 20px
     
@@ -98,18 +104,30 @@ form
   vbox()
   background url(/images/paper-pattern.png)
   margin 10px
-  border-radius(3px)
+  border-radius(4px)
+  paper-shadow()
   
   .inside
     box-flex(1)
     padding 10px
+    background url(/images/paper-bottom.png) repeat-x center bottom
+    border-radius(4px)
     
   input[type=text]
     border 1px solid #dddddd
     padding 10px
     font-size 12px
     font-weight bold
+    background transparent
+    border-box()
+    width 100%
     inset-box-shadow(0px 1px 5px rgba(0, 0, 0, 0.10))
+  
+  input[type=submit]
+    display none
+    
+  input::-webkit-input-placeholder, textarea::-webkit-input-placeholder
+    color #dedede
     
 
 // Buttons
