@@ -18,8 +18,7 @@ class Lists extends Kit.Controller
     # @courses = new Kit.List(model: Course, delegate: this)
     # @list = new Kit.GroupedList(groups: {"My Courses": @courses}, type: "small")
     @lists = new Kit.List(model: List, method: "title", delegate: this)
-    @grouped = new Kit.GroupedList(groups: {"Your Lists": @lists})
-    @append @grouped
+    @append @lists
   
   update: ->
     @layout.setTitle("Your Lists")

@@ -71,6 +71,24 @@ article#content
     #main
       box-flex(1)
 
+// List
+// ----------------------------------------------------------------------------
+
+ul.list
+  margin 0px 20px 0px 20px
+
+  li, li:last-child, li:first-child
+    background: url(/images/paper-row-pattern.png) repeat-x center bottom
+    margin-bottom 10px
+    border-radius(3px)
+    box-shadow(0px 1px 5px rgba(0, 0, 0, 0.75))
+    border none
+    padding 12px 20px 12px 20px
+    
+    &.touch, &:active
+      color #000
+      background url(/images/paper-row-pattern.png) repeat-x center bottom
+
 // Buttons
 // ----------------------------------------------------------------------------
 
