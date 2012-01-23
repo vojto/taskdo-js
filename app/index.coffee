@@ -35,16 +35,18 @@ class App extends Spine.Controller
     @atmos.resourceClient.routes =
       List:
         index: "lists"
-    Defaults.get 'auth_token', (token) =>
-      @atmos.resourceClient.addHeader "Authorization", "OAuth #{token}"
     @atmos.resourceClient.itemsFromResult = (result) ->
       result.items
-      
     @atmos.bind 'auth_fail', =>
       result = confirm("Auth failed, login again?")
       @navigate '/login' if result
+    @_setupAtmosAuth()
       
     List.sync(remote: true)
+  
+  _setupAtmosAuth: ->
+    Defaults.get 'auth_token', (token) =>
+      @atmos.resourceClient.addHeader "Authorization", "OAuth #{token}"
   
   login: ->
     redirectURI = encodeURIComponent("http://localhost:9294/")
@@ -60,6 +62,7 @@ class App extends Spine.Controller
     expires = match[3]
     console.log "token: #{token}"
     Defaults.set 'auth_token', token
+    @_setupAtmosAuth()
     @navigate '/'
 
 
