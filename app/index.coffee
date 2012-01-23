@@ -19,12 +19,13 @@ class App extends Spine.Controller
     @lists      = new Lists(layout: @layout)
     @listForm   = new ListForm(layout: @layout)
     
+    @route /access_token=(.*?)&token_type=(.*?)&expires_in=(.*?)/, @authorize
     @routes
       '':             (params) -> @lists.active(params)
+      '/':             (params) -> @lists.active(params)
       '/lists':       (params) -> @lists.active(params)
       '/lists/new':    (params) -> @listForm.active(params)
       '/login':       (params) -> @login()
-    @route /access_token=(.*?)&token_type=(.*?)&expires_in=(.*?)/, @authorize
     
     Spine.Route.setup()
     
@@ -41,8 +42,6 @@ class App extends Spine.Controller
       result = confirm("Auth failed, login again?")
       @navigate '/login' if result
     @_setupAtmosAuth()
-      
-    List.sync(remote: true)
   
   _setupAtmosAuth: ->
     Defaults.get 'auth_token', (token) =>
@@ -56,6 +55,7 @@ class App extends Spine.Controller
     window.location = "#{path}?response_type=token&client_id=#{clientID}&redirect_uri=#{redirectURI}&scope=#{scope}"
   
   authorize: (params) =>
+    console.log 'authorizing'
     {match} = params
     token = match[1]
     type = match[2]

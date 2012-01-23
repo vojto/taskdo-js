@@ -24,7 +24,7 @@ class Lists extends Kit.Controller
   update: ->
     @layout.setMain(this)
     @layout.addTopButton "New List", @newAction, 'right'
-    List.fetch() # Not sync
+    List.sync(remote: true)
   
   listDidSelectItem: (list, item) ->
     alert "Selected item #{item.name}"
