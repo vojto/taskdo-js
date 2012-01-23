@@ -8,7 +8,7 @@ class ListForm extends Kit.Controller
     fields = 
       title: "Title"
     @form = new Kit.Form(fields: fields, delegate: this)
-    @append @form
+    @el = @form.el
     @active @update
   
   update: ->

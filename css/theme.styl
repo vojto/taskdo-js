@@ -42,7 +42,7 @@ header#header
   .inside
     height 100%
     padding-top 10px
-    padding-right 20px
+    padding-right 10px
     // background url(/images/logo.png) no-repeat center 7px
     
     .title
@@ -70,12 +70,13 @@ article#content
     
     #main
       box-flex(1)
+      vbox()
 
 // List
 // ----------------------------------------------------------------------------
 
 ul.list
-  margin 0px 20px 0px 20px
+  margin 0px 10px 0px 10px
 
   li, li:last-child, li:first-child
     background: url(/images/paper-row-pattern.png) repeat-x center bottom
@@ -88,6 +89,28 @@ ul.list
     &.touch, &:active
       color #000
       background url(/images/paper-row-pattern.png) repeat-x center bottom
+
+// Form
+// ----------------------------------------------------------------------------
+
+form
+  box-flex(1)
+  vbox()
+  background url(/images/paper-pattern.png)
+  margin 10px
+  border-radius(3px)
+  
+  .inside
+    box-flex(1)
+    padding 10px
+    
+  input[type=text]
+    border 1px solid #dddddd
+    padding 10px
+    font-size 12px
+    font-weight bold
+    inset-box-shadow(0px 1px 5px rgba(0, 0, 0, 0.10))
+    
 
 // Buttons
 // ----------------------------------------------------------------------------
