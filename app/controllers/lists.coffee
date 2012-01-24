@@ -20,7 +20,7 @@ class Lists extends Kit.Controller
     @layout.setTitle("Your Lists")
     @layout.setMain(this)
     @layout.addTopButton "New List", @newAction
-    List.sync(remote: @shouldSync, remove: true)
+    List.sync(remote: true, remove: true) if @shouldSync
     @shouldSync = false
   
   didSelect: (list) ->
