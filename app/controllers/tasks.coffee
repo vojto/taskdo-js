@@ -23,5 +23,13 @@ class Tasks extends Kit.Controller
     
     @layout.setMain(this)
     @layout.setTitle(@list.title)
+    @layout.addTopButton "New Task", @newTaskAction
+  
+  didSelect: (task) ->
+    console.log "selected task", task.title
+  
+  newTaskAction: (e) =>
+    e.preventDefault()
+    @navigate "/lists", @list.id, "tasks", "new"
 
 module.exports = Tasks

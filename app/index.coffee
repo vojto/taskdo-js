@@ -9,6 +9,7 @@ Layout      = require('controllers/layout')
 Lists       = require('controllers/lists')
 ListForm    = require('controllers/list_form')
 Tasks       = require('controllers/tasks')
+TaskForm    = require('controllers/task_form')
 List        = require('models/list')
 
 class App extends Spine.Controller
@@ -20,6 +21,7 @@ class App extends Spine.Controller
     @lists      = new Lists(layout: @layout)
     @listForm   = new ListForm(layout: @layout)
     @tasks      = new Tasks(layout: @layout)
+    @taskForm   = new TaskForm(layout: @layout)
     
     @route /access_token=(.*?)&token_type=(.*?)&expires_in=(.*?)/, @authorize
     @routes
@@ -28,6 +30,7 @@ class App extends Spine.Controller
       '/lists':                 (params) -> @lists.active(params)
       '/lists/new':             (params) -> @listForm.active(params)
       '/lists/:list_id/tasks':  (params) -> @tasks.active(params)
+      '/lists/:list_id/tasks/new': (params) -> @taskForm.active(params)
       '/login':                 (params) -> @login()
     
     Spine.Route.setup()
