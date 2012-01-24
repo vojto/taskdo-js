@@ -20,12 +20,14 @@ class TaskForm extends Kit.Controller
     @layout.setMain(this)
     @layout.setTitle "Edit Task"
     @layout.addTopButton "Save", @submitAction
+    @layout.setBackPath "/lists/#{@list.id}/tasks"
   
   didSubmit: (object) ->
-    console.log "submitted", object
-    # list = new List(object)
-    # list.save(remote: true)
-    # @navigate '/lists'
+    task = new Task(object)
+    task.status = "needsAction"
+    task.task_list_id = @list.id
+    task.save(remote: true, sync: true, action: "create", pathParams: {taskListID: @list.id})
+    @navigate '/lists', @list.id, 'tasks'
   
   submitAction: (e) =>
     e.preventDefault()

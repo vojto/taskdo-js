@@ -20,6 +20,7 @@ class Lists extends Kit.Controller
     @layout.setTitle("Your Lists")
     @layout.setMain(this)
     @layout.addTopButton "New List", @newAction
+    @layout.hideBackButton()
     List.sync(remote: true, remove: true) if @shouldSync
     @shouldSync = false
   

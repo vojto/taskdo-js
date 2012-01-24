@@ -3,7 +3,7 @@ Kit     = require('appkit')
 
 class Layout extends Kit.Controller
   template: require('views/layout')
-  
+
   constructor: ->
     super
     @render()
@@ -33,5 +33,13 @@ class Layout extends Kit.Controller
     button.click(action)
     @$("#header .inside .buttons").append(button)
     button
+  
+  setBackPath: (path) ->
+    @$("a.back-button").show().unbind('click').bind 'click', =>
+      @navigate path
+  
+  hideBackButton: ->
+    @$("a.back-button").hide()
+    
   
 module.exports = Layout

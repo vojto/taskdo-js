@@ -8,6 +8,7 @@ class Tasks extends Kit.Controller
   constructor: ->
     super
     @active @update
+    @shouldSync = true
     
     @listView = new Kit.List(model: Task, method: "title", delegate: this, type: 'tasks')
     @listView.predicate = (task) => task.task_list_id == @list.id
@@ -19,11 +20,13 @@ class Tasks extends Kit.Controller
     List.fetch()
     @list = list = List.find(params.list_id)
     update = (task) -> task.task_list_id = list.id
-    Task.sync(remote: true, pathParams: {taskListID: @list.id}, updateData: update)
+    Task.sync(remote: true, pathParams: {taskListID: @list.id}, updateData: update) if @shouldSync
+    @shouldSync = false
     
     @layout.setMain(this)
     @layout.setTitle(@list.title)
     @layout.addTopButton "New Task", @newTaskAction
+    @layout.setBackPath "/lists"
   
   didSelect: (task) ->
     console.log "selected task", task.title
