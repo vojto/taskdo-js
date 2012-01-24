@@ -19,12 +19,14 @@ class Lists extends Kit.Controller
     # @list = new Kit.GroupedList(groups: {"My Courses": @courses}, type: "small")
     @lists = new Kit.List(model: List, method: "title", delegate: this)
     @append @lists
+    
+    List.sync(remote: true, remove: true)
   
   update: ->
     @layout.setTitle("Your Lists")
     @layout.setMain(this)
     @layout.addTopButton "New List", @newAction
-    List.sync(remote: true)
+    List.fetch()
   
   listDidSelectItem: (list, item) ->
     alert "Selected item #{item.name}"
