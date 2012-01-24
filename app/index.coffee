@@ -8,6 +8,7 @@ Defaults = require('atmos2/lib/defaults')
 Layout      = require('controllers/layout')
 Lists       = require('controllers/lists')
 ListForm    = require('controllers/list_form')
+Tasks       = require('controllers/tasks')
 List        = require('models/list')
 
 class App extends Spine.Controller
@@ -18,25 +19,29 @@ class App extends Spine.Controller
     @layout     = new Layout(el: @el)
     @lists      = new Lists(layout: @layout)
     @listForm   = new ListForm(layout: @layout)
+    @tasks      = new Tasks(layout: @layout)
     
     @route /access_token=(.*?)&token_type=(.*?)&expires_in=(.*?)/, @authorize
     @routes
-      '':             (params) -> @lists.active(params)
-      '/':             (params) -> @lists.active(params)
-      '/lists':       (params) -> @lists.active(params)
-      '/lists/new':    (params) -> @listForm.active(params)
-      '/login':       (params) -> @login()
+      '':                       (params) -> @lists.active(params)
+      '/':                      (params) -> @lists.active(params)
+      '/lists':                 (params) -> @lists.active(params)
+      '/lists/new':             (params) -> @listForm.active(params)
+      '/lists/:list_id/tasks':  (params) -> @tasks.active(params)
+      '/login':                 (params) -> @login()
     
     Spine.Route.setup()
     
   
   _setupAtmos: ->
     @atmos = new Atmos
-    @atmos.resourceClient.base = "https://www.googleapis.com/tasks/v1/users/@me"
+    @atmos.resourceClient.base = "https://www.googleapis.com/tasks/v1"
     @atmos.resourceClient.routes =
       List:
-        index: "GET /lists"
-        create: "POST /lists"
+        index: "GET /users/@me/lists"
+        create: "POST /users/@me/lists"
+      Task:
+        index: "GET /lists/:taskListID/tasks"
     @atmos.resourceClient.itemsFromResult = (result) -> result.items
     @atmos.resourceClient.dataCoding = "json"
     @atmos.bind 'auth_fail', =>
