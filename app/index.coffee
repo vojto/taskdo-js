@@ -31,6 +31,7 @@ class App extends Spine.Controller
       '/lists/new':             (params) -> @listForm.active(params)
       '/lists/:list_id/tasks':  (params) -> @tasks.active(params)
       '/lists/:list_id/tasks/new': (params) -> @taskForm.active(params)
+      '/tasks/:task_id/edit':   (params) -> @taskForm.active(params)
       '/login':                 (params) -> @login()
     
     Spine.Route.setup()

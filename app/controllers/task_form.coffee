@@ -16,20 +16,25 @@ class TaskForm extends Kit.Controller
   
   update: (params) ->
     List.fetch()
+    Task.fetch()
     @list = List.find(params.list_id)
+    @task = null
+    @task = Task.find(params.task_id) if params.task_id
+    @form.setValues(@task.attributes()) if @task
     @layout.setMain(this)
     @layout.setTitle "Edit Task"
     @layout.addTopButton "Save", @submitAction
     @layout.setBackPath "/lists/#{@list.id}/tasks"
   
   didSubmit: (object) ->
-    task = new Task(object)
-    task.status = "needsAction"
-    task.task_list_id = @list.id
-    prepare = (data) ->
-      delete data.id
-      data
-    task.save(remote: true, sync: true, action: "create", pathParams: {taskListID: @list.id}, prepareData: prepare)
+    if !@task
+      @task = new Task(object)
+      @task.status = "needsAction"
+      @task.position = "0"
+      @task.task_list_id = @list.id
+    else
+      @task.load(object)
+    @task.save(remote: true)
     @navigate '/lists', @list.id, 'tasks'
   
   submitAction: (e) =>

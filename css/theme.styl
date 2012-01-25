@@ -122,6 +122,7 @@ ul.list
     
     > .inside
       paper-inner()
+      padding-bottom 5px
   
     li
       background url(/images/row-background.png) repeat-x center bottom
@@ -138,11 +139,23 @@ ul.list
         padding 12px 20px 12px 35px
       
       &.needsAction > .inside
-        background url(/images/task.png) no-repeat 10px 8px
+        background url(/images/task.png) no-repeat 10px 11px
 
-      &.completed > .inside
-        background url(/images/task-done.png) no-repeat 10px 8px
-
+      &.completed
+        color #b9bbbf
+      
+        > .inside
+          background url(/images/task-done.png) no-repeat 10px 8px
+      
+      .accessory
+        right()
+        margin-top 12px
+        margin-right 10px
+        display block
+        width 16px
+        height 16px
+        text-indent -999px
+        background url(/images/button-more.png)
 
 // Form
 // ----------------------------------------------------------------------------

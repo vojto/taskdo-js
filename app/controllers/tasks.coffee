@@ -14,11 +14,14 @@ class Tasks extends Kit.Controller
     @listView.predicate = (task) => task.task_list_id == @list.id
     @listView.sort = (a, b) -> a.position - b.position
     @listView.itemClass = (task) -> task.status
+    @listView.accessory = true
     @append @listView
   
   update: (params) ->
     List.fetch()
-    @list = list = List.find(params.list_id)
+    list = List.find(params.list_id)
+    @shouldSync = true if list != @list
+    @list = list
     update = (task) -> task.task_list_id = list.id
     Task.sync(remote: true, pathParams: {taskListID: @list.id}, updateData: update) if @shouldSync
     @shouldSync = false
@@ -31,10 +34,13 @@ class Tasks extends Kit.Controller
   didSelect: (task) ->
     task.toggleStatus()
     console.log {taskListID: @list.id, taskID: task.id}
-    task.save(remote: true, sync: true, action: "update", pathParams: {taskListID: @list.id, taskID: task.id})
+    task.save(remote: true)
   
   newTaskAction: (e) =>
     e.preventDefault()
     @navigate "/lists", @list.id, "tasks", "new"
+  
+  didSelectAccessory: (task) =>
+    @navigate '/tasks', task.id, 'edit', {list_id: task.task_list_id}
 
 module.exports = Tasks
