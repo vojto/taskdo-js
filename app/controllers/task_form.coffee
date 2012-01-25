@@ -26,7 +26,10 @@ class TaskForm extends Kit.Controller
     task = new Task(object)
     task.status = "needsAction"
     task.task_list_id = @list.id
-    task.save(remote: true, sync: true, action: "create", pathParams: {taskListID: @list.id})
+    prepare = (data) ->
+      delete data.id
+      data
+    task.save(remote: true, sync: true, action: "create", pathParams: {taskListID: @list.id}, prepareData: prepare)
     @navigate '/lists', @list.id, 'tasks'
   
   submitAction: (e) =>

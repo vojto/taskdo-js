@@ -46,6 +46,7 @@ class App extends Spine.Controller
       Task:
         index: "GET /lists/:taskListID/tasks"
         create: "POST /lists/:taskListID/tasks"
+        update: "PUT /lists/:taskListID/tasks/:taskID"
     @atmos.resourceClient.itemsFromResult = (result) -> result.items
     @atmos.resourceClient.dataCoding = "json"
     @atmos.bind 'auth_fail', =>

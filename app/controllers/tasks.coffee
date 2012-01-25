@@ -29,7 +29,9 @@ class Tasks extends Kit.Controller
     @layout.setBackPath "/lists"
   
   didSelect: (task) ->
-    console.log "selected task", task.title
+    task.toggleStatus()
+    console.log {taskListID: @list.id, taskID: task.id}
+    task.save(remote: true, sync: true, action: "update", pathParams: {taskListID: @list.id, taskID: task.id})
   
   newTaskAction: (e) =>
     e.preventDefault()
