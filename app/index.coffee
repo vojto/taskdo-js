@@ -48,6 +48,7 @@ class App extends Spine.Controller
         index: "GET /lists/:taskListID/tasks"
         create: "POST /lists/:taskListID/tasks"
         update: "PUT /lists/:taskListID/tasks/:taskID"
+        move: "POST /lists/:taskListID/tasks/:taskID/move"
     @atmos.resourceClient.itemsFromResult = (result) -> result.items
     @atmos.resourceClient.dataCoding = "json"
     @atmos.resourceClient.beforeRequest = @_checkToken

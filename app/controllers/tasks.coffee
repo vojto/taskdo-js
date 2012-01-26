@@ -1,5 +1,6 @@
 Spine = require('spine')
 Kit     = require('appkit')
+Atmos   = require('atmos2')
 
 List = require('models/list')
 Task = require('models/task')
@@ -15,7 +16,19 @@ class Tasks extends Kit.Controller
     @listView.sort = (a, b) -> a.position - b.position
     @listView.itemClass = (task) -> task.status
     @listView.accessory = true
+    @listView.inside.sortable({axis: 'y', update: @_didSort})
     @append @listView
+  
+  _didSort: (event, ui) =>
+    index = @listView.indexForTarget(ui.item)
+    task = @listView.itemAtIndex(index)
+    previous = @listView.itemAtIndex(index-1)
+    options = {colleciton: "Task", action: "move", params: {}}
+    options.pathParams = {taskListID: @list.id, taskID: task.id}
+    options.params.previous = previous.id if previous
+    Atmos.instance.resourceClient.execute options, (result) ->
+      task.position = result.position
+      task.save()
   
   update: (params) ->
     List.fetch()
