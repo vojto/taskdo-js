@@ -59,7 +59,9 @@ ul.grouped-list.small {
   width: 40%;
   margin: auto;
 }
-a {
+a,
+li,
+div {
   cursor: default !important;
 }
 body,

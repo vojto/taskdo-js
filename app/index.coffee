@@ -87,7 +87,7 @@ class App extends Spine.Controller
     url = "#{path}?response_type=token&client_id=#{clientID}&redirect_uri=#{redirectURI}&scope=#{scope}"
     if macgap?
       self = this
-      macgap.auth.login (token, expiresOn) ->
+      macgap.auth.login (token, expiresOn) =>
         console.log "Login successful"
         Defaults.set 'auth_token', token
         Defaults.set 'expires_on', expiresOn

@@ -6,5 +6,11 @@ class List extends Spine.Model
   
   @extend Spine.Model.Atmosphere
 
+  remoteSaveOptions: (options) ->
+    options.prepareData = (data) ->
+      delete data.id if options.action == "create"
+      data
+    options
+
 module.exports = List
 window.List = List
