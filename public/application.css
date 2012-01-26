@@ -136,6 +136,9 @@ header#header .inside .title {
 header#header .inside .buttons {
   float: right;
 }
+header#header .inside .buttons a.button {
+  margin-left: 5px;
+}
 article#content {
   -webkit-box-flex: 1;
   -moz-box-flex: 1;
