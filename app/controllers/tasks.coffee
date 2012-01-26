@@ -16,14 +16,14 @@ class Tasks extends Kit.Controller
     @listView.sort = (a, b) -> a.position - b.position
     @listView.itemClass = (task) -> task.status
     @listView.accessory = true
-    @listView.inside.sortable({axis: 'y', update: @_didSort})
+    @listView.inside.sortable({axis: 'y', update: @_didSort, containment: 'parent'})
     @append @listView
   
   _didSort: (event, ui) =>
     index = @listView.indexForTarget(ui.item)
     task = @listView.itemAtIndex(index)
     previous = @listView.itemAtIndex(index-1)
-    options = {colleciton: "Task", action: "move", params: {}}
+    options = {collection: "Task", action: "move", params: {}}
     options.pathParams = {taskListID: @list.id, taskID: task.id}
     options.params.previous = previous.id if previous
     Atmos.instance.resourceClient.execute options, (result) ->
@@ -41,6 +41,7 @@ class Tasks extends Kit.Controller
     
     @layout.setMain(this)
     @layout.setTitle(@list.title)
+    @layout.addTopButton "Clean Up", @cleanAction
     @layout.addTopButton "New Task", @newTaskAction
     @layout.setBackPath "/lists"
   
@@ -55,5 +56,12 @@ class Tasks extends Kit.Controller
   
   didSelectAccessory: (task) =>
     @navigate '/tasks', task.id, 'edit', {list_id: task.task_list_id}
+  
+  cleanAction: (e) =>
+    e.preventDefault()
+    options = {collection: "List", action: "clear", pathParams: {taskListID: @list.id}}
+    for task in @listView.items
+      task.destroy() if task.status == "completed"
+    Atmos.instance.resourceClient.execute options, (result) =>
 
 module.exports = Tasks

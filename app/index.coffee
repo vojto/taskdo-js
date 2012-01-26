@@ -44,6 +44,7 @@ class App extends Spine.Controller
       List:
         index: "GET /users/@me/lists"
         create: "POST /users/@me/lists"
+        clear: "POST /lists/:taskListID/clear"
       Task:
         index: "GET /lists/:taskListID/tasks"
         create: "POST /lists/:taskListID/tasks"
