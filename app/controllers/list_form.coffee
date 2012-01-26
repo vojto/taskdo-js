@@ -15,6 +15,7 @@ class ListForm extends Kit.Controller
     @layout.setMain(this)
     @layout.setTitle "Edit List"
     @layout.addTopButton "Save", @submitAction
+    @layout.setBackPath '/'
   
   didSubmit: (object) ->
     console.log "submitted", object

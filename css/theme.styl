@@ -3,6 +3,8 @@
 // Reusable
 // ----------------------------------------------------------------------------
 
+a, li, div
+  cursor default !important
 
 // Typo
 // ----------------------------------------------------------------------------
@@ -36,7 +38,7 @@ body, html
 
 body
   vbox()
-  background #3f4a5f url(/images/background-pattern.png)
+  background #3f4a5f url(images/background-pattern.png)
 
 header#header
   vbg-gradient(rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.05))
@@ -47,14 +49,14 @@ header#header
     height 100%
     padding-top 10px
     padding-right 10px
-    // background url(/images/logo.png) no-repeat center 7px
+    // background url(images/logo.png) no-repeat center 7px
     
     a.back-button
       display block
       width 15px
       height 15px
       left()
-      background url(/images/button-back.png)
+      background url(images/button-back.png)
       margin 5px 0px 0px 12px
     
     .title
@@ -88,14 +90,14 @@ article#content
       padding-top 10px
 
 paper-container()
-  background url(/images/paper-pattern.png)
+  background url(images/paper-pattern.png)
   vbox()
   border-radius(4px)
   box-shadow(0px 1px 5px rgba(0, 0, 0, 0.75))
 
 paper-inner()
   box-flex(1)
-  background url(/images/paper-bottom.png) repeat-x center bottom
+  background url(images/paper-bottom.png) repeat-x center bottom
   border-radius(4px)
 
 // List
@@ -105,7 +107,7 @@ ul.list
   margin 0px 10px 0px 10px
 
   li, li:last-child, li:first-child
-    background: url(/images/paper-row-pattern.png) repeat-x center bottom
+    background: url(images/paper-row-pattern.png) repeat-x center bottom
     margin-bottom 10px
     border-radius(3px)
     paper-shadow()
@@ -114,7 +116,7 @@ ul.list
     
     &.touch, &:active
       color #000
-      background url(/images/paper-row-pattern.png) repeat-x center bottom
+      background url(images/paper-row-pattern.png) repeat-x center bottom
       opacity 0.9
   
   &.tasks
@@ -125,27 +127,27 @@ ul.list
       padding-bottom 5px
   
     li
-      background url(/images/row-background.png) repeat-x center bottom
+      background url(images/row-background.png) repeat-x center bottom
       margin-bottom 0px
       font-size 13px
       font-weight normal
       padding 0px
       
       &.touch, &:active
-        background url(/images/row-background.png) repeat-x center bottom
+        background url(images/row-background.png) repeat-x center bottom
         opacity 0.9
       
       > .inside
         padding 12px 20px 12px 35px
       
       &.needsAction > .inside
-        background url(/images/task.png) no-repeat 10px 11px
+        background url(images/task.png) no-repeat 10px 11px
 
       &.completed
         color #b9bbbf
       
         > .inside
-          background url(/images/task-done.png) no-repeat 10px 8px
+          background url(images/task-done.png) no-repeat 10px 8px
       
       .accessory
         right()
@@ -155,7 +157,7 @@ ul.list
         width 16px
         height 16px
         text-indent -999px
-        background url(/images/button-more.png)
+        background url(images/button-more.png)
 
 // Form
 // ----------------------------------------------------------------------------

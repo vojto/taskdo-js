@@ -21,8 +21,7 @@ class Lists extends Kit.Controller
     @layout.setMain(this)
     @layout.addTopButton "New List", @newAction
     @layout.hideBackButton()
-    List.sync(remote: true, remove: true) if @shouldSync
-    @shouldSync = false
+    List.sync(remote: true, remove: true)
   
   didSelect: (list) ->
     @navigate '/lists', list.id, 'tasks'

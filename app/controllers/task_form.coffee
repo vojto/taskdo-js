@@ -20,6 +20,7 @@ class TaskForm extends Kit.Controller
     @list = List.find(params.list_id)
     @task = null
     @task = Task.find(params.task_id) if params.task_id
+    @form.reset()
     @form.setValues(@task.attributes()) if @task
     @layout.setMain(this)
     @layout.setTitle "Edit Task"

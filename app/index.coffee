@@ -50,25 +50,54 @@ class App extends Spine.Controller
         update: "PUT /lists/:taskListID/tasks/:taskID"
     @atmos.resourceClient.itemsFromResult = (result) -> result.items
     @atmos.resourceClient.dataCoding = "json"
+    @atmos.resourceClient.beforeRequest = @_checkToken
     @atmos.bind 'auth_fail', =>
-      result = confirm("Auth failed, login again?")
-      @navigate '/login' if result
+      @navigate '/login'
     @_setupAtmosAuth()
     @atmos.setNeedsSync()
-  
+    
   _setupAtmosAuth: ->
-    Defaults.get 'auth_token', (token) =>
-      @atmos.resourceClient.addHeader "Authorization", "OAuth #{token}"
+    token = Defaults.get 'auth_token'
+    @atmos.resourceClient.addHeader "Authorization", "OAuth #{token}"
+  
+  _checkToken: (callback) ->
+    expires = parseFloat(Defaults.get('expires_on'))
+    current = parseFloat(new Date().getTime() / 1000)
+    console.log expires
+    return callback() if !expires? || isNaN(expires)
+    delta = expires - current
+    return callback() if delta > 60
+    if macgap?
+      console.log "gonna refresh the token, delta = #{expires-current}"
+      macgap.auth.refresh (token, expiresOn) ->
+        console.log "check token callback called #{token} #{expiresOn}"
+        Defaults.set('auth_token', token)
+        Defaults.set 'expires_on', expiresOn
+        @_setupAtmosAuth()
+        callback()
+    else
+      console.log "won't refresh token because macgap is not available"
+      callback()
   
   login: ->
     redirectURI = encodeURIComponent("http://localhost:9294/")
     path = "https://accounts.google.com/o/oauth2/auth"
     clientID = "1022359456025.apps.googleusercontent.com"
     scope = "https://www.googleapis.com/auth/tasks"
-    window.location = "#{path}?response_type=token&client_id=#{clientID}&redirect_uri=#{redirectURI}&scope=#{scope}"
+    url = "#{path}?response_type=token&client_id=#{clientID}&redirect_uri=#{redirectURI}&scope=#{scope}"
+    if macgap?
+      self = this
+      macgap.auth.login (token, expiresOn) ->
+        console.log "Login successful"
+        Defaults.set 'auth_token', token
+        Defaults.set 'expires_on', expiresOn
+        @_setupAtmosAuth()
+        @navigate "/"
+    else
+      window.location = url
   
   authorize: (params) =>
-    console.log 'authorizing'
+    console.log 'authorizing', params
     {match} = params
     token = match[1]
     type = match[2]
