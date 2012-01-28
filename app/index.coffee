@@ -60,6 +60,7 @@ class App extends Spine.Controller
     
   _setupAtmosAuth: ->
     token = Defaults.get 'auth_token'
+    console.log "Setting token to #{token}"
     @atmos.resourceClient.addHeader "Authorization", "OAuth #{token}"
   
   _checkToken: (callback) ->
@@ -71,7 +72,7 @@ class App extends Spine.Controller
     return callback() if delta > 60
     if macgap?
       console.log "gonna refresh the token, delta = #{expires-current}"
-      macgap.auth.refresh (token, expiresOn) ->
+      macgap.auth.refresh (token, expiresOn) =>
         console.log "check token callback called #{token} #{expiresOn}"
         Defaults.set('auth_token', token)
         Defaults.set 'expires_on', expiresOn
