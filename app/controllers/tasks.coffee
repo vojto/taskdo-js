@@ -36,7 +36,8 @@ class Tasks extends Kit.Controller
     @shouldSync = true if list != @list
     @list = list
     update = (task) -> task.task_list_id = list.id
-    Task.sync(remote: true, pathParams: {taskListID: @list.id}, updateData: update) if @shouldSync
+    removeScope = (task) -> task.task_list_id == list.id
+    Task.sync(remote: true, pathParams: {taskListID: @list.id}, updateData: update, remove: true, removeScope: removeScope) if @shouldSync
     @shouldSync = false
     
     @layout.setMain(this)
