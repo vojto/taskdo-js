@@ -150,30 +150,8 @@ article#content {
   -moz-box-orient: vertical;
   -moz-box-align: stretch;
 }
-article#content #middle {
-  display: -webkit-box;
-  -webkit-box-orient: horizontal;
-  -webkit-box-align: stretch;
-  -webkit-box-pack: start;
-  display: -moz-box;
-  -moz-box-orient: horizontal;
-  -moz-box-align: stretch;
-  -moz-box-pack: start;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-}
 article#content #middle #main {
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-box-align: stretch;
-  display: -moz-box;
-  -moz-box-orient: vertical;
-  -moz-box-align: stretch;
-  overflow: auto;
+  width: 100%;
   padding-bottom: 10px;
   padding-top: 10px;
 }
@@ -330,10 +308,9 @@ form textarea {
 }
 form textarea {
   display: block;
-  -webkit-box-flex: 1;
-  -moz-box-flex: 1;
-  box-flex: 1;
-  height: 100%;
+}
+form textarea[name=notes] {
+  height: 200px;
 }
 form input[type=submit] {
   display: none;
