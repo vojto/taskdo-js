@@ -16,8 +16,8 @@ class Tasks extends Kit.Controller
     @listView.sort = (a, b) -> a.position - b.position
     @listView.itemClass = (task) -> task.status
     @listView.accessory = true
-    @listView.inside.sortable({axis: 'y', update: @_didSort, containment: 'parent'})
     @append @listView
+    @listView.inside.sortable({axis: 'y', update: @_didSort})
   
   _didSort: (event, ui) =>
     index = @listView.indexForTarget(ui.item)
