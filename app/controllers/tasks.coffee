@@ -22,10 +22,11 @@ class Tasks extends Kit.Controller
   _didSort: (event, ui) =>
     index = @listView.indexForTarget(ui.item)
     task = @listView.itemAtIndex(index)
-    previous = @listView.itemAtIndex(index-1)
+    previous = if index == 0 then null else @listView.itemAtIndex(index-1)
     options = {collection: "Task", action: "move", params: {}}
     options.pathParams = {taskListID: @list.id, taskID: task.id}
     options.params.previous = previous.id if previous
+    console.log 'executing with', options
     Atmos.instance.resourceClient.execute options, (result) ->
       task.position = result.position
       task.save()
